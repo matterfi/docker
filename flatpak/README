@@ -14,8 +14,8 @@ https://github.com/bilelmoussaoui/flatpak-github-actions/blob/master/.github/wor
 ##############
 building images
 
-docker image build -t polishcode/flatpak:kde-5.15-1       -f Dockerfile-flatpak-kde-5.15 .
-docker image build -t polishcode/flatpak:kde-5.15-21.08-1 -f Dockerfile-flatpak-kde-5.15-21.08 .
+docker image build -t polishcode/matterfi-flatpak:kde-5.15-2       -f Dockerfile-flatpak-kde-5.15 .
+docker image build -t polishcode/matterfi-flatpak:kde-5.15-21.08-2 -f Dockerfile-flatpak-kde-5.15-21.08 .
 
 naming pattern (flatpak:kde-5.15-1):
     flatpak  docker image dedicated to building flatpak releases

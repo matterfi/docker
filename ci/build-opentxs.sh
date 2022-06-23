@@ -26,6 +26,7 @@ if [ "${CXX_COMPILER}" == "" ]; then
 fi
 
 set -e
+git config --global --add safe.directory "${SRC}"  #https://stackoverflow.com/a/71941707
 source /var/lib/opentxs-config.sh "${3}"
 rm -rf "${WORK}/"*
 cd "${WORK}"

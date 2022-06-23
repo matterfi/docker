@@ -1,4 +1,4 @@
-FROM fedora:32 AS fedora-base
+FROM fedora:35 AS fedora-base
 
 FROM fedora-base AS fedora-download
 RUN dnf --nodocs install -y --setopt=install_weak_deps=False \
@@ -45,7 +45,7 @@ RUN cd /tmp/gtest && \
     mv googletest-release-* /usr/src/gtest
 
 FROM fedora-download AS iwyu-download
-ARG IWYU_BRANCH="clang_10"
+ARG IWYU_BRANCH="clang_13"
 RUN mkdir -p /usr/src \
     && git clone --recursive "https://github.com/include-what-you-use/include-what-you-use" /usr/src/iwyu \
     && cd /usr/src/iwyu \
