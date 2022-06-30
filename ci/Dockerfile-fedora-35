@@ -32,6 +32,13 @@ RUN dnf --nodocs install -y --setopt=install_weak_deps=False \
     sqlite-devel \
     which \
     zeromq-devel \
+    compiler-rt.x86_64 \
+    tree \
+    findutils \
+    gcovr \
+    nano \
+    cargo \
+    spdlog \
     && rm -rf /var/cache/dnf
 
 FROM fedora-download AS gtest-download
@@ -250,12 +257,15 @@ COPY --from=fedora-cmake /usr/local /usr/local
 COPY --from=fedora-qt /usr/local /usr/local
 COPY --from=fedora-opendht /usr/local /usr/local
 RUN ldconfig
-COPY ./build-opentxs.sh /usr/bin
-COPY ./build-opentxs-clang.sh /usr/bin
-COPY ./build-opentxs-gcc.sh /usr/bin
-COPY ./test-opentxs.sh /usr/bin
-COPY ./opentxs-config.sh /var/lib
+COPY ./build-opentxs.sh         /usr/bin
+COPY ./build-opentxs-clang.sh   /usr/bin
+COPY ./build-opentxs-gcc.sh     /usr/bin
+COPY ./ccov-opentxs-gcc.sh      /usr/bin
+COPY ./test-opentxs.sh          /usr/bin
+COPY ./opentxs-config.sh        /var/lib
+COPY ./opentxs-prologue.sh      /var/lib
 RUN chmod a+x /usr/bin/build-opentxs.sh
 RUN chmod a+x /usr/bin/build-opentxs-clang.sh
 RUN chmod a+x /usr/bin/build-opentxs-gcc.sh
+RUN chmod a+x /usr/bin/ccov-opentxs-gcc.sh
 RUN chmod a+x /usr/bin/test-opentxs.sh
