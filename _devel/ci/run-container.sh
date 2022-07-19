@@ -7,4 +7,4 @@ docker run \
     --mount type=bind,src=/mnt/f/temp/opentxs-coverage,dst=/home/coverage \
     --mount type=bind,src=/home/pgawron/opentxs/output,dst=/home/output \
     --workdir=/home/script \
-    polishcode/matterfi-ci-fedora:35-2
+    polishcode/matterfi-ci-fedora:35-3

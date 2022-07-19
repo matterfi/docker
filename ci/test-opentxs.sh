@@ -13,6 +13,5 @@ fi
 
 cd "${WORK}"
 
-echo ${CTEST_PARAMS}
-#cmake --install .  #no need to install
+echo "-- ctest params: " ${CTEST_PARAMS}
 ctest ${CTEST_PARAMS}
