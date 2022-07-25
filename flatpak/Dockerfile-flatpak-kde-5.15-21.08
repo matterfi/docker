@@ -1,4 +1,6 @@
 FROM bilelmoussaoui/flatpak-github-actions:kde-5.15-21.08
 
-RUN dnf update -y && \
-    dnf clean all
+RUN dnf --nodocs install -y --setopt=install_weak_deps=False \
+    rust \
+    cargo \
+    && rm -rf /var/cache/dnf
