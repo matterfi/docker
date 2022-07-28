@@ -9,10 +9,11 @@ These images construct build environments for compiling and testing Open-Transac
 ```
 docker image build -t opentransactions/ci:10 .
 docker image build -t polishcode/matterfi-ci-fedora:32-1 .
-docker image build -t polishcode/matterfi-ci-fedora:33-1 -f Dockerfile-fedora-33 .
-docker image build -t polishcode/matterfi-ci-fedora:34-1 -f Dockerfile-fedora-34 .
-docker image build -t polishcode/matterfi-ci-fedora:35-3 -f Dockerfile-fedora-35 .
-docker image build -t polishcode/matterfi-ci-fedora:36-1 -f Dockerfile-fedora-36 .
+docker image build -t polishcode/matterfi-ci-fedora:33-1      -f Dockerfile-fedora-33 .
+docker image build -t polishcode/matterfi-ci-fedora:34-1      -f Dockerfile-fedora-34 .
+docker image build -t polishcode/matterfi-ci-fedora:35-3      -f Dockerfile-fedora-35 .
+docker image build -t polishcode/matterfi-ci-fedora:36-1      -f Dockerfile-fedora-36 .
+docker image build -t polishcode/matterfi-ci-fedora:36-tidy-1 -f Dockerfile-fedora-36-tidy .
 ```
 
 ### Base Fedora version
