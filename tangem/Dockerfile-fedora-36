@@ -1,0 +1,59 @@
+FROM fedora:36 AS fedora-base
+
+FROM fedora-base AS fedora-download
+RUN dnf --nodocs install -y --setopt=install_weak_deps=False \
+    git bzip2 lzo p7zip wget xz \
+    && rm -rf /var/cache/dnf
+
+FROM fedora-base AS fedora-build
+RUN dnf --nodocs install -y --setopt=install_weak_deps=False \
+    clang \
+    clang-analyzer \
+    cmake \
+    cppcheck \
+    gcc \
+    gcc-c++ \
+    git \
+    gnutls-devel \
+    harfbuzz \
+    libargon2 \
+    libicu \
+    libpng \
+    libsodium-devel \
+    llvm \
+    lmdb-devel \
+    mesa-libGL \
+    mesa-libOSMesa \
+    msgpack-devel \
+    ninja-build \
+    openssl-devel \
+    protobuf-compiler \
+    protobuf-lite-devel \
+    sqlite-devel \
+    which \
+    zeromq-devel \
+    libusb-devel.x86_64 \
+    systemd-devel \
+    && rm -rf /var/cache/dnf
+
+FROM fedora-download AS gtest-download
+ARG GTEST_VERSION="release-1.11.0"
+RUN mkdir -p /tmp/gtest/
+RUN wget -O /tmp/gtest/gtest.tar.gz https://github.com/google/googletest/archive/refs/tags/${GTEST_VERSION}.tar.gz
+RUN cd /tmp/gtest && \
+    tar -xf "gtest.tar.gz" && \
+    rm -f "gtest.tar.gz" && \
+    mkdir -p /usr/src && \
+    mv googletest-release-* /usr/src/gtest
+
+FROM fedora-build AS fedora-gtest
+COPY --from=gtest-download /usr/src/gtest /usr/src/gtest
+RUN mkdir -p /tmp/gtest
+RUN cd /tmp/gtest && \
+    cmake -DBUILD_SHARED_LIBS=ON /usr/src/gtest && \
+    make install
+
+FROM fedora-build AS opentxs-fedora-ci
+COPY --from=fedora-gtest /usr/local /usr
+RUN ldconfig
+RUN /usr/bin/git config --system --add safe.directory '*'
