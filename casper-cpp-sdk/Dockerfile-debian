@@ -1,0 +1,12 @@
+FROM debian:stable-20220912-slim
+
+RUN apt update \
+    && \
+    apt -y install --no-install-recommends \
+    cmake \
+    ninja-build \
+    clang \
+    gcc \
+    g++ \
+    && \
+    apt autoclean
