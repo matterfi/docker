@@ -1,0 +1,10 @@
+FROM fedora:35
+
+RUN dnf --nodocs install -y --setopt=install_weak_deps=False \
+    git bzip2 lzo p7zip wget xz \
+    cmake \
+    ninja-build \
+    clang \
+    gcc \
+    gcc-c++ \
+    && rm -rf /var/cache/dnf
